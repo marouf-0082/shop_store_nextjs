@@ -1,42 +1,49 @@
 import Container from "@/components/Container";
 import ProductItem from "@/components/ProductItem";
+import Link from "next/link";
 
 function Store() {
   const data = [
     {
       id: "1",
       title: "Product 1",
-      imageURL: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageURL:
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       description: "lksdjfeif jf eijfjfie jf ejfjf fefiels;flek",
       price: 24,
     },
     {
       id: "2",
       title: "Product 2",
-      imageURL: "https://images.unsplash.com/photo-1600185365778-7875a359b924?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageURL:
+        "https://images.unsplash.com/photo-1600185365778-7875a359b924?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       description: "sjdfklje fkjsdf lejfksdj fejifjsfe fej",
       price: 56,
     },
     {
       id: "3",
       title: "Product 3",
-      imageURL: "https://images.unsplash.com/photo-1595309849731-f7ce86eda9fc?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageURL:
+        "https://images.unsplash.com/photo-1595309849731-f7ce86eda9fc?q=80&w=1283&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       description: "skd jfioew jflksd fiejflsj lfjef lkjes ",
       price: 85,
     },
     {
       id: "4",
       title: "Product 4",
-      imageURL: "https://images.unsplash.com/photo-1712167631738-4dab9e53c853?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      imageURL:
+        "https://images.unsplash.com/photo-1712167631738-4dab9e53c853?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       description: "lorem skdfj sjdflje fsijlf weifjsi fiejf ",
       price: 99,
     },
-  ]
+  ];
   return (
     <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-6">
-        {data.map(item => (
-          <ProductItem key={item.id} {...item}/>
+        {data.map((item) => (
+          <Link href={`store/${item.id}`} key={item.id}>
+            <ProductItem {...item} />
+          </Link>
         ))}
       </div>
     </Container>
