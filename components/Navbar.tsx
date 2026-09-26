@@ -18,21 +18,26 @@ function Navbar() {
     },
   ];
   return (
-    <nav className="shadow p-4" >
+    <nav className="shadow p-4">
       <Container>
-        <div>
-          <ul className="flex items-center space-x-2">
-            {navLinks.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={item.href}
-                  className={`${pathName === item.href ? "text-blue-500" : "text-slate-700"}`}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="flex items-center justify-between">
+          <div>
+            <ul className="flex items-center space-x-2">
+              {navLinks.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    href={item.href}
+                    className={`${pathName === item.href ? "text-blue-500" : "text-slate-700"}`}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="">
+            <Link href={"/cart"}>Cart</Link>
+          </div>
         </div>
       </Container>
     </nav>

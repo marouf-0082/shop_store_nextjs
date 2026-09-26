@@ -1,3 +1,4 @@
+import AddToCart from "@/components/AddToCart";
 import Container from "@/components/Container";
 import { IProductItemProps } from "@/components/ProductItem";
 
@@ -7,7 +8,8 @@ interface IProductProps{
 }
 
 async function Product({params}: IProductProps) {
-  const result = await fetch(`http://localhost:8000/product/${(await params).id}`);
+  const {id} = await params;
+  const result = await fetch(`http://localhost:8000/product/${id}`);
   const product = (await result.json()) as IProductItemProps;
   return (
     <Container>
@@ -24,11 +26,7 @@ async function Product({params}: IProductProps) {
             Price: <span>{product.price}$</span>
           </p>
 
-          <div className="mt-4">
-            <button className="py-1 px-2 rounded-2xl bg-slate-200">+</button>
-            <span className="mx-4">3</span>
-            <button className="py-1 px-2 rounded-2xl bg-slate-200">-</button>
-          </div>
+         <AddToCart id={id}/>
         </div>
       </div>
     </Container>
