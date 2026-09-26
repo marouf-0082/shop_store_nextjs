@@ -14,6 +14,8 @@ interface ICartItems {
 interface IShoppingCartContext {
     cartItems: ICartItems[];
     handleIncreaseProductQty: (id: number) => void;
+    getProductQty: (id: number) => number;
+    cartTotalQty: number;
 }
 
 const ShoppingCartContext = createContext({} as IShoppingCartContext);
@@ -27,7 +29,15 @@ export function ShoppingCartContextProvider({
 }: IShoppingCartContextProviderProps) {
   const [cartItems, setCartItems] = useState<ICartItems[]>([]);
 
-  console.log(cartItems)
+  // Get TotalQty
+  const cartTotalQty = cartItems.reduce((total, item)=> {
+        return total + item.qty;
+    } ,0)
+  
+
+   const getProductQty = (id: number) => {
+    return cartItems.find((item) => item.id === id)?.qty || 0;
+   }
 
   const handleIncreaseProductQty = (id: number) => {
     setCartItems((currentItem) => {
@@ -46,7 +56,7 @@ export function ShoppingCartContextProvider({
     })
   }
   return (
-    <ShoppingCartContext.Provider value={{cartItems,handleIncreaseProductQty}}>
+    <ShoppingCartContext.Provider value={{cartItems,handleIncreaseProductQty, getProductQty, cartTotalQty}}>
       {children}
     </ShoppingCartContext.Provider>
   );

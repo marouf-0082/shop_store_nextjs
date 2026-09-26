@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
+import { useShoppingCartContext } from "@/context/ShopingCartContext";
 
 function Navbar() {
+  const {cartTotalQty} = useShoppingCartContext();
   const pathName = usePathname();
   const navLinks = [
     {
@@ -17,6 +19,8 @@ function Navbar() {
       href: "/store",
     },
   ];
+
+
   return (
     <nav className="shadow p-4">
       <Container>
@@ -36,6 +40,7 @@ function Navbar() {
             </ul>
           </div>
           <div className="">
+            <span className="p-1 bg-red-600 text-white rounded-full">{cartTotalQty}</span>
             <Link href={"/cart"}>Cart</Link>
           </div>
         </div>
