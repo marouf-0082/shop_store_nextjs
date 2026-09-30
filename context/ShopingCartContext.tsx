@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 interface IShoppingCartContextProviderProps {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ interface IShoppingCartContext {
     getProductQty: (id: number) => number;
     cartTotalQty: number;
     handleDecreaseProductQty: (id: number) => void;
-        handleRemoveProduct: (id: number) => void;
+    handleRemoveProduct: (id: number) => void;
 
 }
 
