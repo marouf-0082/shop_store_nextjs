@@ -18,6 +18,11 @@ function Navbar() {
       title: "Store",
       href: "/store",
     },
+    {
+      id: "3",
+      title: "Dashboard",
+      href: "/dashboard",
+    },
   ];
 
 

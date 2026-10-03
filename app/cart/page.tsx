@@ -3,12 +3,12 @@ import CartItem from "@/components/CartItem";
 import Container from "@/components/Container";
 import { IProductItemProps } from "@/components/ProductItem";
 import { useShoppingCartContext } from "@/context/ShopingCartContext";
+import { formatNuberWithCommas } from "@/utils/number";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { formatNuberWithCommas } from "../utils/number";
 
 interface IDiscountData {
-  id: number;
+  id: string;
   code: string;
   percentage: number;
 }
@@ -18,10 +18,10 @@ function Cart() {
   const [data, setData] = useState<IProductItemProps[]>();
   const [discountCode, setDiscountCode] = useState("");
   const [finalPrice, setFinalPrice] = useState(0);
-  const [discountedPrice, setDiscountedPrice] = useState(0)
+  const [discountedPrice, setDiscountedPrice] = useState(0);
 
   useEffect(() => {
-    axios(`http://localhost:8000/product`).then((res) => {
+    axios(`http://localhost:3004/product`).then((res) => {
       const { data } = res;
       setData(data);
     });
@@ -34,17 +34,29 @@ function Cart() {
     return total + (selectedProduct?.price || 0) * item.qty;
   }, 0);
 
-  const handleSubmitDiscount = () => { 
-    axios(`http://localhost:8000/discounts?code=${discountCode}`).then(
+  const handleSubmitDiscount = () => {
+    axios(`http://localhost:3004/discounts?code=${discountCode}`).then(
       (result) => {
         const data = result.data as IDiscountData[];
 
-        let discountedPrice = totalPrice * data[0].percentage / 100;
-        let finalPrice  = totalPrice - discountedPrice;
+        let discountedPrice = (totalPrice * data[0].percentage) / 100;
+        let finalPrice = totalPrice - discountedPrice;
         setFinalPrice(finalPrice);
         setDiscountedPrice(discountedPrice);
       },
     );
+  };
+
+const handleSubmitOrder = () => {
+    if(!cartItems.length) return alert("Cart is empty");
+    
+    
+    axios({
+      method: "POST",
+      url: "http://localhost:3004/order",
+      data: {
+      },
+    });
   };
   return (
     <Container>
@@ -81,6 +93,9 @@ function Cart() {
               onChange={(e) => setDiscountCode(e.target.value)}
             />
           </div>
+          <button onClick={handleSubmitOrder} className="px-4 py-1 bg-sky-500 rounded mt-2 text-white">
+            Submit Order
+          </button>
         </div>
       </div>
     </Container>

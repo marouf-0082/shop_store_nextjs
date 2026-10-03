@@ -1,21 +1,35 @@
 import Container from "@/components/Container";
-import ProductItem, { IProductItemProps } from "@/components/ProductItem";
+import Pagination from "@/components/Pagination";
+import ProductItem, { IProductList } from "@/components/ProductItem";
 import Link from "next/link";
 
-async function Store() {
-  const result = await fetch('http://localhost:8000/product');
-  const data = await result.json() as IProductItemProps[];
+interface IStoreProps {
+  params: Promise<{}>;
+  searchParams: Promise<{ page: string; per_page: string }>;
+}
+
+async function Store({ searchParams }: IStoreProps) {
+  const page = (await searchParams).page ?? "1";
+  const per_page = (await searchParams).per_page ?? "2";
+
+  const result = await fetch(
+    `http://localhost:3004/product?_page=${page}&_per_page=${per_page}`,
+  );
+  const data = (await result.json()) as IProductList;
+  console.log(data.data);
+
   return (
     <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 my-6">
-        {data.map((item) => (
+        {data.data.map((item) => (
           <Link href={`store/${item.id}`} key={item.id}>
             <ProductItem {...item} />
           </Link>
         ))}
       </div>
+        <Pagination pageCount={data.pages}/>
     </Container>
   );
-}``
+}
 
 export default Store;

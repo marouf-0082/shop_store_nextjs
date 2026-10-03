@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IProductItemProps } from "./ProductItem";
 import AddToCart from "./AddToCart";
-import { formatNuberWithCommas } from "@/app/utils/number";
+import { formatNuberWithCommas } from "@/utils/number";
 
 interface ICartItemProps {
   id: number;
@@ -13,7 +13,7 @@ interface ICartItemProps {
 function CartItem({ id, qty }: ICartItemProps) {
   const [data, setData] = useState({} as IProductItemProps);
   useEffect(() => {
-    axios(`http://localhost:8000/product/${id}`).then((res) => {
+    axios(`http://localhost:3004/product/${id}`).then((res) => {
       const { data } = res;
       setData(data);
     });

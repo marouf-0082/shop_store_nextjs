@@ -9,7 +9,7 @@ interface IProductProps{
 
 async function Product({params}: IProductProps) {
   const {id} = await params;
-  const result = await fetch(`http://localhost:8000/product/${id}`);
+  const result = await fetch(`http://localhost:3004/product/${id}`);
   const product = (await result.json()) as IProductItemProps;
   return (
     <Container>
