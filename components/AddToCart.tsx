@@ -2,7 +2,7 @@
 
 import { useShoppingCartContext } from "@/context/ShopingCartContext";
 interface IAddToCartProps {
-  id: number;
+  id: string;
 }
 
 function AddToCart({ id }: IAddToCartProps) {

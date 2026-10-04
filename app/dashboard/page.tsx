@@ -22,19 +22,14 @@ function Dashboard() {
     });
   };
 
-  const handleCreateProduct = () => {
+  const handleCreateProduct = async () => {
     console.log(newProduct);
 
-    axios({
-      method: "post",
-      url: "http://localhost:3004/product",
-      data: {
-        id: Math.floor(Math.random() * 1000),
-        title: newProduct.title,
-        imageURL: newProduct.image,
-        description: newProduct.description,
-        price: newProduct.price,
-      },
+    await axios.post("http://localhost:3004/product", {
+      title: newProduct.title,
+      imageURL: newProduct.image,
+      description: newProduct.description,
+      price: newProduct.price,
     });
   };
   return (

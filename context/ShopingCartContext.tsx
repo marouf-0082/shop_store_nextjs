@@ -1,23 +1,23 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface IShoppingCartContextProviderProps {
   children: React.ReactNode;
 }
 
 interface ICartItems {
-  id: number;
+  id: string;
   qty: number;
 }
 
 interface IShoppingCartContext {
   cartItems: ICartItems[];
-  handleIncreaseProductQty: (id: number) => void;
-  getProductQty: (id: number) => number;
+  handleIncreaseProductQty: (id: string) => void;
+  getProductQty: (id: string) => number;
   cartTotalQty: number;
-  handleDecreaseProductQty: (id: number) => void;
-  handleRemoveProduct: (id: number) => void;
+  handleDecreaseProductQty: (id: string) => void;
+  handleRemoveProduct: (id: string) => void;
 }
 
 const ShoppingCartContext = createContext({} as IShoppingCartContext);
@@ -36,11 +36,11 @@ export function ShoppingCartContextProvider({
     return total + item.qty;
   }, 0);
 
-  const getProductQty = (id: number) => {
+  const getProductQty = (id: string) => {
     return cartItems.find((item) => item.id === id)?.qty || 0;
   };
 
-  const handleIncreaseProductQty = (id: number) => {
+  const handleIncreaseProductQty = (id: string) => {
     setCartItems((currentItems) => {
       let existProduct = currentItems.find((item) => item.id === id);
       if (!existProduct) {
@@ -57,7 +57,7 @@ export function ShoppingCartContextProvider({
     });
   };
 
-  const handleDecreaseProductQty = (id: number) => {
+  const handleDecreaseProductQty = (id: string) => {
     setCartItems((currentItems) => {
       let isLastOne = currentItems.find((item) => item.id == id)?.qty == 1;
 
@@ -79,7 +79,7 @@ export function ShoppingCartContextProvider({
   };
 
   // Remove product from cart
-  const handleRemoveProduct = (id: number) => {
+  const handleRemoveProduct = (id: string) => {
     setCartItems((currentItems) => {
       localStorage.removeItem("cartItems");
       return currentItems.filter((item) => item.id != id);

@@ -6,7 +6,7 @@ import AddToCart from "./AddToCart";
 import { formatNuberWithCommas } from "@/utils/number";
 
 interface ICartItemProps {
-  id: number;
+  id: string;
   qty: number;
 }
 

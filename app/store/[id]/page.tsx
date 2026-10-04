@@ -26,7 +26,7 @@ async function Product({params}: IProductProps) {
             Price: <span>{product.price}$</span>
           </p>
 
-         <AddToCart id={parseInt(id)}/>
+         <AddToCart id={id}/>
         </div>
       </div>
     </Container>
