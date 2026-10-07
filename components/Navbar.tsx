@@ -53,10 +53,10 @@ function Navbar() {
           <div className="flex items-center gap-2">
             <span className="p-1 bg-red-600 text-white rounded-full">{cartTotalQty}</span>
             <Link href={"/cart"}>Cart</Link>
-            <button className="text-red-600" onClick={()=> {
+            {Cookies.get('token') && <button className="text-red-600" onClick={()=> {
               Cookies.remove("token")
               redirect("/")
-            }}>Logout</button>
+            }}>Logout</button>}
           </div>
         </div>
       </Container>
