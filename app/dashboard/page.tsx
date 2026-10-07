@@ -23,14 +23,18 @@ function Dashboard() {
   };
 
   const handleCreateProduct = async () => {
-    console.log(newProduct);
-
     await axios.post("http://localhost:3004/product", {
       title: newProduct.title,
       imageURL: newProduct.image,
       description: newProduct.description,
       price: newProduct.price,
     });
+    setNewProduct({
+      title: "",
+      price: "",
+      image: "",
+      description: "",
+    })
   };
   return (
     <div className="bg-slate-300 p-4">
@@ -40,24 +44,28 @@ function Dashboard() {
             onChange={handleChangeProduct}
             name="title"
             type="text"
+            value={newProduct.title}
             placeholder="Title"
           />
           <input
             onChange={handleChangeProduct}
             name="price"
             type="text"
+            value={newProduct.price}
             placeholder="Price"
           />
           <input
             onChange={handleChangeProduct}
             name="image"
             type="text"
+            value={newProduct.image}
             placeholder="Photo"
           />
         </div>
         <textarea
           onChange={handleChangeProduct}
           name="description"
+          value={newProduct.description}
           className="w-full mt-4"
           placeholder="Description"
         ></textarea>
