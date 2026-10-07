@@ -3,6 +3,7 @@ import Container from "@/components/Container";
 // import axios from "axios";
 import { useState } from "react";
 import Cookie from "js-cookie";
+import { motion } from "framer-motion";
 import { redirect } from "next/navigation";
 
 function Login() {
@@ -43,7 +44,7 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={handleLogin} className="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+          <motion.button whileTap={{scale: 0.9}} onClick={handleLogin} className="bg-blue-500 text-white px-4 py-2 rounded">Submit</motion.button>
         </div>
       </Container>
     </div>

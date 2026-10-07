@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -22,7 +23,7 @@ function Search() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button onClick={handleSearch} className="bg-sky-500 text-white p-2 rounded">Search</button>
+      <motion.button whileTap={{scale: 0.9}} onClick={handleSearch} className="bg-sky-500 text-white p-2 rounded">Search</motion.button>
     </div>
   );
 }
